@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이예은 | 마케팅 기획자 포트폴리오</title>
+    <style>
+        /* --- CSS 변수 및 초기화 (진지하고 점잖은 2컬러 톤) --- */
+        :root {
+            --color-bg: #ffffff;
+            --color-primary: #111827;   /* 깊고 신뢰감 있는 딥 네이비 블랙 */
+            --color-secondary: #4b5563; /* 단정하고 차분한 다크 그레이 */
+            --color-accent: #9ca3af;    /* 메타 정보용 라이트 그레이 */
+            --color-border: #e5e7eb;    /* 정교한 구분선용 그레이 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            letter-spacing: -0.03em; /* 제안서 특유의 꽉 찬 느낌 */
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-primary);
+        }
+
+        body {
+            padding-top: 80px; /* 고정 헤더 영역 확보 */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .border-top {
+            border-top: 1px solid var(--color-border);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- 상단 네비게이션 --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-secondary);
+            margin-left: 35px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        /* --- 히어로 섹션 (카피와 사진 우측 배치) --- */
+        .hero-section {
+            min-height: calc(85vh - 80px);
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1.2;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--color-primary);
+            margin-bottom: 24px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.1rem;
+            line-height: 1.75;
+            color: var(--color-secondary);
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: #ffffff;
+            padding: 16px 36px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #1f2937;
+        }
+
+        .hero-image-area {
+            flex: 0.8;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* 프로필 사진 스타일 (정교한 직사각형 포맷) */
+        .profile-img {
+            width: 100%;
+            max-width: 340px;
+            height: 420px;
+            object-fit: cover;
+            border: 1px solid var(--color-border);
+            background-color: #f3f4f6; /* 사진이 로드되기 전 기본 회색 영역 */
+        }
+
+        /* --- 핵심 역량 섹션 --- */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skills-grid {
+            display: flex;
+            gap: 40px;
+        }
+
+        .skill-item {
+            flex: 1;
+        }
+
+        .skill-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+
+        .skill-item p {
+            font-size: 1rem;
+            color: var(--color-secondary);
+            line-height: 1.7;
+        }
+
+        /* --- 프로젝트 리스트 섹션 --- */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-item {
+            border-top: 1px solid var(--color-border);
+            padding: 40px 0;
+            display: flex;
+        }
+
+        .project-item:last-child {
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .project-info {
+            width: 100%;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .project-number {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        .project-item h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-summary {
+            font-size: 1.05rem;
+            color: var(--color-secondary);
+            line-height: 1.65;
+            margin-bottom: 15px;
+            max-width: 850px;
+        }
+
+        .project-meta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            letter-spacing: 0.05em;
+        }
+
+        /* --- 약력 및 연락처 섹션 --- */
+        .about-container {
+            display: flex;
+            gap: 60px;
+        }
+
+        .about-title {
+            flex: 0.8;
+        }
+
+        .about-title h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .about-content {
+            flex: 2;
+        }
+
+        .about-lead {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--color-primary);
+            margin-bottom: 35px;
+        }
+
+        .contact-list li {
+            font-size: 1rem;
+            margin-bottom: 14px;
+            list-style: none;
+        }
+
+        .contact-list li span {
+            display: inline-block;
+            width: 100px;
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        /* --- 푸터 --- */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            text-align: center;
+        }
+
+        /* --- 모바일 반응형 디자인 브레이크포인트 --- */
+        @media (max-width: 960px) {
+            .hero-container {
+                flex-direction: column-reverse; /* 모바일은 가독성을 위해 사진이 상단으로 이동 */
+                align-items: flex-start;
+                gap: 35px;
+            }
+            .hero-image-area {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .profile-img {
+                width: 100%;
+                max-width: 100%;
+                height: 360px;
+            }
+            .hero-text h1 {
+                font-size: 2.1rem;
+            }
+            .skills-grid {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .about-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <div class="logo"><a href="#">LEE YEEUN</a></div>
+            <nav>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Core Skills</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-text">
+                <h1>데이터로 방향을 잡고,<br>크리에이티브로 마음을 움직입니다.</h1>
+                <p class="subtitle">안녕하세요, 매체 광고 집행(Google/Naver)을 통한 데이터 분석부터, Adobe 툴을 활용한 비주얼 콘텐츠 제작까지 기획과 실행을 동시에 완성하는 마케팅 기획자 이예은입니다. 화려한 수식어보다 정교한 숫자와 시각적 몰입감으로 브랜드의 성장을 증명합니다.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary">포트폴리오 확인하기</a>
+                </div>
+            </div>
+            <div class="hero-image-area">
+                <img src="profile.jpg" alt="마케팅 기획자 이예은 프로필 사진" class="profile-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section-padding border-top">
+        <div class="container">
+            <h2 class="section-title">Core Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>Performance & Planning</h3>
+                    <p>구글 애즈(Google Ads) 및 네이버 검색/성과형 광고 집행, 마케팅 전략 수립 및 데이터 대시보드 모니터링, 제안서 및 리포트 작성</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Content & Creative</h3>
+                    <p>소비자 페르소나 분석 기반 콘텐츠 마케팅 기획, Adobe Photoshop / Illustrator (이미지 크리에이티브 제작), Premiere Pro / After Effects (숏폼 및 영상 광고 편집)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section-padding border-top">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-list">
+                
+                <article class="project-item">
+                    <div class="project-info">
+                        <span class="project-number">01</span>
+                        <h3>구글·네이버 SA/DA 광고 집행 및 ROI 최적화</h3>
+                        <p class="project-summary">타겟 고객 분석을 바탕으로 키워드를 도출하고, 네이버 및 구글 매체 광고를 직접 세팅 및 집행하여 브랜드 인지도를 높이고 전환율을 극대화한 프로젝트입니다.</p>
+                        <div class="project-meta">PERFORMANCE MARKETING / DATA ANALYSIS</div>
+                    </div>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-info">
+                        <span class="project-number">02</span>
+                        <h3>Adobe 툴을 활용한 브랜드 콘텐츠 마케팅 캠페인</h3>
+                        <p class="project-summary">콘텐츠 마케팅 전략을 수립한 후, 포토샵과 프리미어를 활용해 SNS 이미지 배너 및 숏폼 광고 영상을 직접 제작·A/B 테스트하여 효율을 개선했습니다.</p>
+                        <div class="project-meta">CONTENT MARKETING / VIDEO & IMAGE PRODUCTION</div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding border-top">
+        <div class="container about-container">
+            <div class="about-title">
+                <h2>Contact &<br>Perspective</h2>
+            </div>
+            <div class="about-content">
+                <p class="about-lead">"기획에 머무르지 않고, 성과로 증명하는 마케터가 되겠습니다."<br>단순히 예쁜 콘텐츠를 만드는 것을 넘어, 정교한 데이터 분석과 제안서 작성을 통해 기업의 비즈니스 성장에 기여합니다.</p>
+                <ul class="contact-list">
+                    <li><span>Email</span> yeeun@example.com</li>
+                    <li><span>Phone</span> +82 (0)10 1234 5678</li>
+                    <li><span>Channels</span> <a href="#" style="text-decoration: underline;">LinkedIn</a> / <a href="#" style="text-decoration: underline;">Notion Portfolio</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <p>&copy; 2026 Lee Yeeun. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
